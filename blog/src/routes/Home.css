@@ -28,13 +28,13 @@
   opacity: 1;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  max-width: 100px;
+  max-width: 120px;
   text-align: center;
   cursor: pointer;
   transition: 0.3s;
 }
 
-.btn:hover{
-    color: #fff;
-    background-color: #0e1217;
+.btn:hover {
+  color: #fff;
+  background-color: #0e1217;
 }

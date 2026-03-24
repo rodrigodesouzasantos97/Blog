@@ -40,7 +40,7 @@ const NewPost = () => {
             id="title"
             placeholder="Digite o título"
             onChange={(e) => setTitle(e.target.value)}
-            value={title}
+            value={title || ""}
           />
         </div>
 
@@ -51,7 +51,7 @@ const NewPost = () => {
             id="body"
             placeholder="Digite o conteúdo"
             onChange={(e) => setBody(e.target.value)}
-            value={body}
+            value={body || ""}
           ></textarea>
         </div>
         <input type="submit" value="Enviar" className="btn" />

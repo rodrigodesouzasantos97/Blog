@@ -4,6 +4,12 @@
   align-items: center;
   padding: 1rem 2rem;
   background-color: #17191f;
+  margin-bottom: 2rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
 }
 
 #navbar h2 a {
@@ -16,9 +22,9 @@
 }
 
 .new-btn {
-    font-weight: bold;
-    opacity: 1;
-    border: 1px solid #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+  font-weight: bold;
+  opacity: 1;
+  border: 1px solid #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
 }
