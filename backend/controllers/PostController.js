@@ -11,6 +11,24 @@ const getPosts = async (req, res) => {
   }
 };
 
+const getPost = async (req, res) => {
+  try {
+    const id = req.params.id;
+
+    const post = await Post.findById(id);
+
+    if(!post) {
+      res.status(404).json({ msg: "Post não encontrado." });
+      return;
+    }
+
+    res.status(200).json(post);
+  } catch (error) {
+    console.log(error);
+    res.status(500).send("Ocorreu um erro!");
+  }
+};
+
 const createPost = async (req, res) => {
   try {
     const { title, description, author, image } = req.body;
@@ -39,4 +57,5 @@ const createPost = async (req, res) => {
 module.exports = {
   createPost,
   getPosts,
+  getPost,
 };
