@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const blogFetch = axios.create({
-  baseURL: "https://jsonplaceholder.typicode.com",
+  baseURL: "http://localhost:3000/posts/",
   headers: {
     "Content-Type": "application/json",
   },
