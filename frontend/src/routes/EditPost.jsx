@@ -10,18 +10,22 @@ const EditPost = () => {
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [description, setDescription] = useState("");
+  const [author, setAuthor] = useState("");
+  const [image, setImage] = useState("");
 
   const { id } = useParams();
 
   const getPost = async () => {
     try {
-      const response = await blogFetch.get(`/posts/${id}`);
+      const response = await blogFetch.get(`/${id}`);
 
       const data = response.data;
 
       setTitle(data.title);
-      setBody(data.body);
+      setDescription(data.description);
+      setAuthor(data.author);
+      setImage(data.image);
     } catch (error) {
       console.log(error);
     }
@@ -36,19 +40,32 @@ const EditPost = () => {
 
     const post = {
       title,
-      body,
-      useId: 1,
+      description,
+      author,
+      image,
     };
 
-    await blogFetch.put(`/posts/${id}`, {
-      body: post,
-    });
+    await blogFetch.patch(`/${id}`, post);
+
+    navigate("/admin");
   };
 
   return (
     <div className="edit-post">
       <h2>Editando: {title}</h2>
       <form onSubmit={edit}>
+        <div className="form-control">
+          <label htmlFor="author">Autor:</label>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            placeholder="Digite o autor"
+            onChange={(e) => setAuthor(e.target.value)}
+            value={author || ""}
+          />
+        </div>
+        
         <div className="form-control">
           <label htmlFor="title">Título:</label>
           <input
@@ -62,14 +79,26 @@ const EditPost = () => {
         </div>
 
         <div className="form-control">
-          <label htmlFor="title">Conteúdo:</label>
+          <label htmlFor="description">Conteúdo:</label>
           <textarea
-            name="body"
-            id="body"
+            name="description"
+            id="description"
             placeholder="Digite o conteúdo"
-            onChange={(e) => setBody(e.target.value)}
-            value={body || ""}
+            onChange={(e) => setDescription(e.target.value)}
+            value={description || ""}
           ></textarea>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="image">Imagem:</label>
+          <input
+            type="text"
+            name="image"
+            id="image"
+            placeholder="Digite o link da imagem"
+            onChange={(e) => setImage(e.target.value)}
+            value={image || ""}
+          />
         </div>
         <input type="submit" value="Editar" className="btn" />
       </form>
