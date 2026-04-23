@@ -55,7 +55,7 @@ const Home = () => {
               <p>{formatDate(post.createdAt)}</p>
               <p>
                 {post.createdAt !== post.updatedAt
-                  ? `Editado em: ${formatDate(post.createdAt)}`
+                  ? `Editado em: ${formatDate(post.updatedAt)}`
                   : ""}
               </p>
             </div>
