@@ -13,7 +13,7 @@ const Post = () => {
 
   const getPost = async () => {
     try {
-      const response = await blogFetch.get(`/posts/${id}`);
+      const response = await blogFetch.get(`/${id}`);
 
       const data = response.data;
 
@@ -33,8 +33,10 @@ const Post = () => {
         <p>Carregando...</p>
       ) : (
         <div className="post">
+          <p>{post.author}</p>
           <h3>{post.title}</h3>
-          <p>{post.body}</p>
+          <p>{post.description}</p>
+          <img src={post.image} alt={post.title} />
         </div>
       )}
     </div>
