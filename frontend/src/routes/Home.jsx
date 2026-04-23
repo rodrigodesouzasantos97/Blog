@@ -45,7 +45,7 @@ const Home = () => {
       {posts.length === 0 ? (
         <p>Carregando...</p>
       ) : (
-        posts.map((post) => (
+        posts.toReversed().map((post) => (
           <div className="post" key={post._id}>
             <PostContent post={post} />
             <Link to={`/posts/${post._id}`} className="btn">
