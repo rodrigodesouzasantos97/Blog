@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
+import PostContent from "../components/PostContent";
+
 import "./Admin.css";
 
 const Admin = () => {
@@ -11,7 +13,7 @@ const Admin = () => {
 
   const getPosts = async () => {
     try {
-      const response = await blogFetch.get("/posts");
+      const response = await blogFetch.get("/");
       const data = response.data;
       setPosts(data);
     } catch (error) {
@@ -38,11 +40,12 @@ const Admin = () => {
         <p>Carregando...</p>
       ) : (
         posts.map((post) => (
-          <div className="post" key={post.id}>
-            <h3>{post.title}</h3>
-            <p>{post.body}</p>
+          <div className="post" key={post._id}>
+            <PostContent post={post} />
             <div className="actions">
-              <Link className="btn edit-btn" to={`/posts/edit/${post.id}`}>Editar</Link>
+              <Link className="btn edit-btn" to={`/posts/edit/${post.id}`}>
+                Editar
+              </Link>
               <button
                 className="btn delete-btn"
                 onClick={() => deletePost(post.id)}

@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
+import PostContent from "../components/PostContent";
+
 import "./Home.css";
 
 const Home = () => {
@@ -45,14 +47,7 @@ const Home = () => {
       ) : (
         posts.map((post) => (
           <div className="post" key={post._id}>
-            <p>{post.author}</p>
-            <div className="content">
-              <img src={post.image} alt={post.title} />
-              <div className="texts">
-                <h3>{post.title}</h3>
-                <p>{post.description}</p>
-              </div>
-            </div>
+            <PostContent post={post} />
             <Link to={`/posts/${post._id}`} className="btn">
               Ler Mais
             </Link>
