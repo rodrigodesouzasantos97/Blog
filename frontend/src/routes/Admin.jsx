@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
 
+import { toast } from "react-toastify";
+
 import PostContent from "../components/PostContent";
 
 import "./Admin.css";
@@ -26,11 +28,17 @@ const Admin = () => {
   }, []);
 
   const deletePost = async (id) => {
-    await blogFetch.delete(`/${id}`);
+    try {
+      const response = await blogFetch.delete(`/${id}`);
 
-    const filteredPosts = posts.filter((post) => post._id !== id);
+      const filteredPosts = posts.filter((post) => post._id !== id);
 
-    setPosts(filteredPosts);
+      setPosts(filteredPosts);
+      toast.success(response.data.msg);
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+    }
   };
 
   return (

@@ -2,6 +2,8 @@ import blogFetch from "../axios/config";
 
 import { useState } from "react";
 
+import { toast } from "react-toastify";
+
 import { useNavigate } from "react-router-dom";
 
 import PostForm from "../components/PostForm";
@@ -17,16 +19,22 @@ const NewPost = () => {
   const createPost = async (e) => {
     e.preventDefault();
 
-    const post = {
-      title,
-      description,
-      author,
-      image,
-    };
+    try {
+      const post = {
+        title,
+        description,
+        author,
+        image,
+      };
 
-    await blogFetch.post("/", post);
+      const response = await blogFetch.post("/", post);
 
-    navigate("/");
+      toast.success(response.data.msg);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      toast.error(error.response.data.msg);
+    }
   };
 
   return (

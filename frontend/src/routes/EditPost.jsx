@@ -4,7 +4,9 @@ import { useState, useEffect, useId } from "react";
 
 import { useNavigate, useParams } from "react-router-dom";
 
-import PostForm from "../components/PostForm"
+import { toast } from "react-toastify";
+
+import PostForm from "../components/PostForm";
 
 const EditPost = () => {
   const navigate = useNavigate();
@@ -38,16 +40,22 @@ const EditPost = () => {
   const edit = async (e) => {
     e.preventDefault();
 
-    const post = {
-      title,
-      description,
-      author,
-      image,
-    };
+    try {
+      const post = {
+        title,
+        description,
+        author,
+        image,
+      };
 
-    await blogFetch.patch(`/${id}`, post);
+      const response = await blogFetch.patch(`/${id}`, post);
 
-    navigate("/admin");
+      toast.success(response.data.msg);
+      navigate("/admin");
+    } catch (error) {
+      console.log(error);
+      toast.success(error.response.data.msg);
+    }
   };
 
   return (
