@@ -9,21 +9,22 @@ import "./NewPost.css";
 const NewPost = () => {
   const navigate = useNavigate();
 
+  const [author, setAuthor] = useState("");
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
+  const [description, setDescription] = useState("");
+  const [image, setImage] = useState("");
 
   const createPost = async (e) => {
     e.preventDefault();
 
     const post = {
       title,
-      body,
-      userId: 1,
+      description,
+      author,
+      image,
     };
 
-    await blogFetch.post("/posts", {
-      body: post,
-    });
+    await blogFetch.post("/", post);
 
     navigate("/");
   };
@@ -32,6 +33,18 @@ const NewPost = () => {
     <div className="new-post">
       <h2>Inserir novo Post:</h2>
       <form onSubmit={createPost}>
+        <div className="form-control">
+          <label htmlFor="author">Autor:</label>
+          <input
+            type="text"
+            name="author"
+            id="author"
+            placeholder="Digite o autor"
+            onChange={(e) => setAuthor(e.target.value)}
+            value={author || ""}
+          />
+        </div>
+
         <div className="form-control">
           <label htmlFor="title">Título:</label>
           <input
@@ -45,15 +58,28 @@ const NewPost = () => {
         </div>
 
         <div className="form-control">
-          <label htmlFor="title">Conteúdo:</label>
+          <label htmlFor="description">Conteúdo:</label>
           <textarea
-            name="body"
-            id="body"
+            name="description"
+            id="description"
             placeholder="Digite o conteúdo"
-            onChange={(e) => setBody(e.target.value)}
-            value={body || ""}
+            onChange={(e) => setDescription(e.target.value)}
+            value={description || ""}
           ></textarea>
         </div>
+
+        <div className="form-control">
+          <label htmlFor="image">Imagem:</label>
+          <input
+            type="text"
+            name="image"
+            id="image"
+            placeholder="Digite o link da imagem"
+            onChange={(e) => setImage(e.target.value)}
+            value={image || ""}
+          />
+        </div>
+
         <input type="submit" value="Enviar" className="btn" />
       </form>
     </div>
