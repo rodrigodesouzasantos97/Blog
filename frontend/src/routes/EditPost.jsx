@@ -6,8 +6,6 @@ import { useNavigate, useParams } from "react-router-dom";
 
 import PostForm from "../components/PostForm"
 
-import "./EditPost.css";
-
 const EditPost = () => {
   const navigate = useNavigate();
 

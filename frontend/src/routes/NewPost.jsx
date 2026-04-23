@@ -6,8 +6,6 @@ import { useNavigate } from "react-router-dom";
 
 import PostForm from "../components/PostForm";
 
-import "./NewPost.css";
-
 const NewPost = () => {
   const navigate = useNavigate();
 
